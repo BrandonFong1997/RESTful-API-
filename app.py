@@ -1,57 +1,47 @@
 from flask import Flask, jsonify
-from flask_restful import reqparse, abort, Api, Resource
+from flask_restful import request, Api, Resource
+from flask_pymongo import PyMongo
+
+from model.model import carModel
 
 app = Flask(__name__)
 api = Api(app)
+mongo = PyMongo(app)
 
 cars = {
-    'Tesla':{
-        'Model_S': 'Grey',
-        'Model_X': 'Red',
-        'Model_3': 'White'
+    {
+        'id': '001',
+        'Make': 'Tesla',
+        'Model': 'Model S',
+        'Colour': 'White'
     },
 
-    'BMW':{
-        'i8': 'Orange',
-        'x5': 'Black'
+    {
+        'id': '002',
+        'Make': 'BMW',
+        'Model': 'i8',
+        'Colour': 'Orange'
+    },
+
+    {
+        'id': '003',
+        'Make': 'Tesla',
+        'Model': 'Model X',
+        'Colour': 'Grey'
     }
 }
 
-parser = reqparse.RequestParser()
-parser.add_argument('Company')
-parser.add_argument('Model')
-parser.add_argument('Colour')
+class User(Resource):
+    @staticmethod
+    def get(car_id):
 
-class Model(Resource):
-    def get(self, company, model):
-        return cars[company][model]
+        cars = carModel.find_by_id(car_id)
+        data = jsonify(cars.__dict__)
+        data.status_code = 200
+        return data
 
-class Company(Resource):
-    def get(self, company):
-        return cars[company]
+api.add_resource(cars, '/<car_id>')
 
-    def put(self, company):
-        args = parser.parse_args()
-        model = {args['Model']:args['Colour']}
-        cars[company] = model
-        return model, 200
-
-    def delete(self, company):
-        del cars[company]
-        return '', 204
-
-class Cars(Resource) :
-    def get(self):
-        return cars
-
-    def post(self):
-        args = parser.parse_args()
-        cars[args['Company']][args['Model']] = args['Colour']
-        return {args['Model']:args['Colour']}, 200
-
-api.add_resource(Cars, '/cars')
-api.add_resource(Company, '/cars/<company>')
-api.add_resource(Model, '/cars/<company>/<model>')
 
 if __name__ == '__main__':
     app.run(debug=True)
