@@ -11,23 +11,23 @@ mongo = PyMongo(app)
 cars = {
     {
         'id': '001',
-        'Make': 'Tesla',
-        'Model': 'Model S',
-        'Colour': 'White'
+        'make': 'Tesla',
+        'model': 'Model S',
+        'colour': 'White'
     },
 
     {
         'id': '002',
-        'Make': 'BMW',
-        'Model': 'i8',
-        'Colour': 'Orange'
+        'make': 'BMW',
+        'model': 'i8',
+        'colour': 'Orange'
     },
 
     {
         'id': '003',
-        'Make': 'Tesla',
-        'Model': 'Model X',
-        'Colour': 'Grey'
+        'make': 'Tesla',
+        'model': 'Model X',
+        'colour': 'Grey'
     }
 }
 
@@ -41,6 +41,7 @@ class User(Resource):
         return data
 
 api.add_resource(cars, '/<car_id>')
+api.add_resource(cars, '/')
 
 
 if __name__ == '__main__':
