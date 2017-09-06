@@ -18,7 +18,9 @@ cars = {
 }
 
 parser = reqparse.RequestParser()
-parser.add_argument('car')
+parser.add_argument('Company')
+parser.add_argument('Model')
+parser.add_argument('Colour')
 
 class Model(Resource):
     def get(self, company, model):
@@ -28,9 +30,24 @@ class Company(Resource):
     def get(self, company):
         return cars[company]
 
+    def put(self, company):
+        args = parser.parse_args()
+        model = {args['Model']:args['Colour']}
+        cars[company] = model
+        return model, 200
+
+    def delete(self, company):
+        del cars[company]
+        return '', 204
+
 class Cars(Resource) :
     def get(self):
         return cars
+
+    def post(self):
+        args = parser.parse_args()
+        cars[args['Company']][args['Model']] = args['Colour']
+        return {args['Model']:args['Colour']}, 200
 
 api.add_resource(Cars, '/cars')
 api.add_resource(Company, '/cars/<company>')
