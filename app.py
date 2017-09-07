@@ -40,6 +40,19 @@ class User(Resource):
         data.status_code = 200
         return data
 
+    @staticmethod
+    def post():
+
+        payload = request.get_json()
+
+
+
+        data = jsonify(cars.__dict__)
+        data.status_code = 201
+
+        return data
+
+
 api.add_resource(cars, '/<car_id>')
 api.add_resource(cars, '/')
 
