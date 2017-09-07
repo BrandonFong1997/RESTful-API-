@@ -15,3 +15,8 @@ class carModel:
 
         return car_model
 
+    @staticmethod
+    def create_car(payload):
+
+
+

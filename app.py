@@ -8,29 +8,6 @@ app = Flask(__name__)
 api = Api(app)
 mongo = PyMongo(app)
 
-cars = {
-    {
-        'id': '001',
-        'make': 'Tesla',
-        'model': 'Model S',
-        'colour': 'White'
-    },
-
-    {
-        'id': '002',
-        'make': 'BMW',
-        'model': 'i8',
-        'colour': 'Orange'
-    },
-
-    {
-        'id': '003',
-        'make': 'Tesla',
-        'model': 'Model X',
-        'colour': 'Grey'
-    }
-}
-
 class User(Resource):
     @staticmethod
     def get(car_id):
@@ -44,8 +21,7 @@ class User(Resource):
     def post():
 
         payload = request.get_json()
-
-
+        cars = carModel.create_car(payload)
 
         data = jsonify(cars.__dict__)
         data.status_code = 201

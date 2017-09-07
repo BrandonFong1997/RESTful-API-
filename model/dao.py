@@ -6,7 +6,7 @@ class carDao:
         self._logger = print
 
     def get_connection(self):
-        collection = config.MONGO_DBNAME
+        collection = "cars"
 
         connection = MongoUtils.get_mongo_connection()
         db = getattr(connection, collection)
