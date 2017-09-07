@@ -3,10 +3,10 @@ from pymongo.database import ObjectId
 
 class carDao:
     def __init__(self):
-        self._logger = print
+        print self._logger
 
     def get_connection(self):
-        collection = "cars"
+        collection = "carList"
 
         connection = MongoUtils.get_mongo_connection()
         db = getattr(connection, collection)
@@ -23,3 +23,14 @@ class carDao:
 
         return _car_user
 
+    def create_car(self, cars):
+        car_db = self.get_connection()
+
+        _car_user = car_db.find_one({"_id": int(cars['_id'])})
+        if _car_user:
+            return None
+
+        result = car_db.insert_one(cars)
+        _new_car = car_db.find_one({"_id": result.inserted_id})
+
+        return _new_car

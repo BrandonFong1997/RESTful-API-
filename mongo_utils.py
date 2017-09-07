@@ -7,8 +7,11 @@ class MongoUtils:
     @staticmethod
     def get_mongo_connection():
 
+        host = "http://127.0.0.1:27017"
+        table = "cars"
+
         client = MongoClient(host)
 
-        db = getattr(client)
+        db = getattr(client, table)
 
         return db

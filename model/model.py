@@ -17,6 +17,11 @@ class carModel:
 
     @staticmethod
     def create_car(payload):
+        dao = carDao()
 
+        cars = dao.create_car(payload)
+        car_model = carModel(cars)
+
+        return car_model
 
 
