@@ -5,9 +5,9 @@ class MongoUtils:
         pass
 
     @staticmethod
-    def get_mongo_connection():
+    def get_mongo_connection_db():
 
-        host = "http://127.0.0.1:27017"
+        host = "mongodb://127.0.0.1:27017"
         table = "cars"
 
         client = MongoClient(host)

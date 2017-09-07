@@ -6,12 +6,12 @@ class carDao:
         print self._logger
 
     def get_connection(self):
-        collection = "carList"
+        collection_name = "carList"
 
-        connection = MongoUtils.get_mongo_connection()
-        db = getattr(connection, collection)
+        db = MongoUtils.get_mongo_connection_db()
+        collection = getattr(db, collection_name)
 
-        return db
+        return collection
 
     def get_user_by_id(self, car_id):
         _car_user = None
