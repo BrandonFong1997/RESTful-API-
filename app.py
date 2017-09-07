@@ -8,7 +8,7 @@ app = Flask(__name__)
 api = Api(app)
 mongo = PyMongo(app)
 
-class User(Resource):
+class Car(Resource):
     @staticmethod
     def get(car_id):
 
@@ -29,8 +29,8 @@ class User(Resource):
         return data
 
 
-api.add_resource(cars, '/<car_id>')
-api.add_resource(cars, '/')
+api.add_resource(Car, '/<car_id>')
+api.add_resource(Car, '/')
 
 
 if __name__ == '__main__':
