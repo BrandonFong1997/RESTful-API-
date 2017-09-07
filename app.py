@@ -17,6 +17,7 @@ class Car(Resource):
         data.status_code = 200
         return data
 
+class CarQuery(Resource):
     @staticmethod
     def post():
 
@@ -30,7 +31,7 @@ class Car(Resource):
 
 
 api.add_resource(Car, '/<car_id>')
-api.add_resource(Car, '/')
+api.add_resource(CarQuery, '/')
 
 
 if __name__ == '__main__':
