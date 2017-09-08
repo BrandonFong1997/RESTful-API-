@@ -22,7 +22,7 @@ class carDao:
     def create_car(self, cars):
         car_db = self.get_collection()
 
-        _car_user = car_db.find_one({"_id": int(cars['_id'])})
+        _car_user = car_db.find_one({"_id": str(cars['_id'])})
         if _car_user:
             return None
 
@@ -30,3 +30,25 @@ class carDao:
         _new_car = car_db.find_one({"_id": result.inserted_id})
 
         return _new_car
+
+    def update_car(self, car_id, cars):
+        car_db = self.get_collection()
+
+        _car_user = car_db.find_one({"_id": str(cars['_id'])})
+
+        result = car_db.update_one({"_id": ObjectId(car_id)}, {"$set": cars})
+
+        _car_user = car_db.find_one({"_id": ObjectId(car_id)})
+
+        return _car_user
+
+    def delete_car(self, car_id):
+        car_db = self.get_collection()
+
+        _car_user = car_db.find_one({"_id": ObjectId(car_id)})
+        if not _car_user:
+            return None
+
+        delete_result = car_db.delete_one({"_id": ObjectId(car_id)})
+
+        return delete_result

@@ -17,6 +17,30 @@ class Car(Resource):
         data.status_code = 200
         return data
 
+    @staticmethod
+    def put(car_id):
+
+        payload = request.get_json()
+        cars = carModel.find_by_id(car_id)
+
+        cars = carModel.update_car(car_id, payload)
+
+        data = jsonify(cars.__dict__)
+        data.status_code = 200
+
+        return data
+
+    @staticmethod
+    def delete(car_id):
+
+        id_json = {'id': car_id}
+        response = carModel.delete_car(car_id)
+
+        data = jsonify(cars.__dict__)
+        data.status_code = 200
+
+        return data
+
 class CarQuery(Resource):
     @staticmethod
     def post():
@@ -30,7 +54,7 @@ class CarQuery(Resource):
         return data
 
 
-api.add_resource(Car, '/<car_id>')
+api.add_resource(Car,'/', '/<car_id>')
 api.add_resource(CarQuery, '/')
 
 

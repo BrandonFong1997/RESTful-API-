@@ -25,4 +25,23 @@ class carModel:
 
         return car_model
 
+    @staticmethod
+    def update_car(car_id, payload):
+        dao = carDao()
 
+        car = dao.update_car(car_id, payload)
+
+        car_model = carModel(car_id)
+
+        return car_model
+
+    @staticmethod
+    def delete_car(car_id):
+        dao = carDao()
+
+        response = dao.delete_car(car_id)
+
+        if response:
+            response = {'message': 'car deleted'}
+
+        return response
