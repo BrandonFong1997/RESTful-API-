@@ -36,7 +36,7 @@ class Car(Resource):
         id_json = {'id': car_id}
         response = carModel.delete_car(car_id)
 
-        data = jsonify(cars.__dict__)
+        data = jsonify(response)
         data.status_code = 200
 
         return data
@@ -46,6 +46,7 @@ class CarQuery(Resource):
     def post():
 
         payload = request.get_json()
+        
         cars = carModel.create_car(payload)
 
         data = jsonify(cars.__dict__)

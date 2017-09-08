@@ -20,21 +20,15 @@ class carDao:
         return _car_user
 
     def create_car(self, cars):
-        car_db = self.get_collection()
+        car_collection = self.get_collection()
 
-        _car_user = car_db.find_one({"_id": str(cars['_id'])})
-        if _car_user:
-            return None
-
-        result = car_db.insert_one(cars)
-        _new_car = car_db.find_one({"_id": result.inserted_id})
+        result = car_collection.insert_one(cars)
+        _new_car = car_collection.find_one({"_id": result.inserted_id})
 
         return _new_car
 
     def update_car(self, car_id, cars):
         car_db = self.get_collection()
-
-        _car_user = car_db.find_one({"_id": str(cars['_id'])})
 
         result = car_db.update_one({"_id": ObjectId(car_id)}, {"$set": cars})
 

@@ -29,9 +29,9 @@ class carModel:
     def update_car(car_id, payload):
         dao = carDao()
 
-        car = dao.update_car(car_id, payload)
+        cars = dao.update_car(car_id, payload)
 
-        car_model = carModel(car_id)
+        car_model = carModel(cars)
 
         return car_model
 
