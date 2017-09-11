@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  my_web_app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: my_web_app
+    environment:
+      SERVICE_NAME: 'my_web_app'
+      MONGO_PORT: 27017
+      MONGO_DBNAME: 'cars'
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    ports:
+      - '5000:5000'

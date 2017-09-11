@@ -1,0 +1,8 @@
+Flask==0.11.1
+Flask-Restful==0.3.5
+Flask-Pymongo
+PyMongo==3.4.0
+voluptuous==0.9.3
+bcrypt==3.1.2
+coverage==4.3.4
+pycrypto==2.6.1

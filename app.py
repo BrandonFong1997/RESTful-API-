@@ -9,16 +9,15 @@ api = Api(app)
 mongo = PyMongo(app)
 
 class Car(Resource):
-    @staticmethod
-    def get(car_id):
+
+    def get(self, car_id):
 
         cars = carModel.find_by_id(car_id)
         data = jsonify(cars.__dict__)
         data.status_code = 200
         return data
 
-    @staticmethod
-    def put(car_id):
+    def put(self, car_id):
 
         payload = request.get_json()
         cars = carModel.find_by_id(car_id)
@@ -30,8 +29,7 @@ class Car(Resource):
 
         return data
 
-    @staticmethod
-    def delete(car_id):
+    def delete(self, car_id):
 
         id_json = {'id': car_id}
         response = carModel.delete_car(car_id)
@@ -42,11 +40,11 @@ class Car(Resource):
         return data
 
 class CarQuery(Resource):
-    @staticmethod
-    def post():
+
+    def post(self):
 
         payload = request.get_json()
-        
+
         cars = carModel.create_car(payload)
 
         data = jsonify(cars.__dict__)
@@ -55,9 +53,11 @@ class CarQuery(Resource):
         return data
 
 
-api.add_resource(Car,'/', '/<car_id>')
+api.add_resource(Car,'/','/<car_id>')
 api.add_resource(CarQuery, '/')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True, port=5000)
+
+    # host = '127.0.0.1'

@@ -7,7 +7,6 @@ class carModel:
         self.model = collection['model']
         self.colour = collection['colour']
 
-    @staticmethod
     def find_by_id(car_id):
         dao = carDao()
         cars = dao.get_car_by_id(car_id)
@@ -16,7 +15,6 @@ class carModel:
 
         return car_model
 
-    @staticmethod
     def create_car(payload):
         dao = carDao()
 
@@ -25,7 +23,6 @@ class carModel:
 
         return car_model
 
-    @staticmethod
     def update_car(car_id, payload):
         dao = carDao()
 
@@ -35,7 +32,6 @@ class carModel:
 
         return car_model
 
-    @staticmethod
     def delete_car(car_id):
         dao = carDao()
 

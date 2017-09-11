@@ -31,7 +31,6 @@ class carDao:
         car_db = self.get_collection()
 
         result = car_db.update_one({"_id": ObjectId(car_id)}, {"$set": cars})
-
         _car_user = car_db.find_one({"_id": ObjectId(car_id)})
 
         return _car_user
