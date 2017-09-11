@@ -28,20 +28,32 @@ class carDao:
         return _new_car
 
     def update_car(self, car_id, cars):
-        car_db = self.get_collection()
+        car_collection = self.get_collection()
 
-        result = car_db.update_one({"_id": ObjectId(car_id)}, {"$set": cars})
-        _car_user = car_db.find_one({"_id": ObjectId(car_id)})
+        result = car_collection.update_one({"_id": ObjectId(car_id)}, {"$set": cars})
+        _car_user = car_collection.find_one({"_id": ObjectId(car_id)})
 
         return _car_user
 
     def delete_car(self, car_id):
-        car_db = self.get_collection()
+        car_collection = self.get_collection()
 
-        _car_user = car_db.find_one({"_id": ObjectId(car_id)})
+        _car_user = car_collection.find_one({"_id": ObjectId(car_id)})
         if not _car_user:
             return None
 
-        delete_result = car_db.delete_one({"_id": ObjectId(car_id)})
+        delete_result = car_collection.delete_one({"_id": ObjectId(car_id)})
 
         return delete_result
+
+    def get_all_cars(self):
+        car_collection = self.get_collection()
+
+        cars = []
+
+        total_collection = car_collection.find()
+
+        for car in total_collection:
+            cars.append(car)
+
+        return cars

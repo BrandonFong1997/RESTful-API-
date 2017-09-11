@@ -20,7 +20,6 @@ class Car(Resource):
     def put(self, car_id):
 
         payload = request.get_json()
-        cars = carModel.find_by_id(car_id)
 
         cars = carModel.update_car(car_id, payload)
 
@@ -31,7 +30,6 @@ class Car(Resource):
 
     def delete(self, car_id):
 
-        id_json = {'id': car_id}
         response = carModel.delete_car(car_id)
 
         data = jsonify(response)
@@ -52,12 +50,22 @@ class CarQuery(Resource):
 
         return data
 
+    def get(self):
 
-api.add_resource(Car,'/','/<car_id>')
+        query_cars = [car.__dict__ for car in carModel.get_all_cars()]
+
+        data = jsonify(query_cars)
+        data.status_code = 200
+
+        return query_cars
+
+
+api.add_resource(Car, '/<car_id>')
 api.add_resource(CarQuery, '/')
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5000)
 
+    # host = '0.0.0.0'
     # host = '127.0.0.1'

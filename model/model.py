@@ -41,3 +41,14 @@ class carModel:
             response = {'message': 'car deleted'}
 
         return response
+
+    def get_all_cars():
+        dao = carDao()
+
+        cars = []
+        retrieve = dao.get_all_cars()
+
+        for total_cars in retrieve:
+            cars.append(carModel(total_cars))
+
+        return cars

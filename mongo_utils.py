@@ -7,7 +7,8 @@ class MongoUtils:
     @staticmethod
     def get_mongo_connection_db():
 
-        host = "mongo"
+        host = "mongodb://127.0.0.1:27017"
+        # host = "mongo"
         # host = "mongodb://127.0.0.1:27017"
         table = "cars"
 
