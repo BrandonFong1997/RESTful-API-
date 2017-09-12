@@ -6,7 +6,6 @@ from model.model import carModel
 
 app = Flask(__name__)
 api = Api(app)
-mongo = PyMongo(app)
 
 class Car(Resource):
 

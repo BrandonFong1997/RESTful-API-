@@ -50,10 +50,6 @@ class carDao:
         car_collection = self.get_collection()
 
         cars = []
-
-        total_collection = car_collection.find()
-
-        for car in total_collection:
-            cars.append(car)
+        cars = car_collection.find()
 
         return cars
