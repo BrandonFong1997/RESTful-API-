@@ -7,7 +7,9 @@ class MongoUtils:
     @staticmethod
     def get_mongo_connection_db():
 
-        host = "mongodb://127.0.0.1:27017"
+        host = "mongo"
+        # host = "mongodb://127.0.0.1:27017"
+
         # DOCKER TEST host = "mongo"
         # LOCAL TEST host = "mongodb://127.0.0.1:27017"
         table = "cars"

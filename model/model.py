@@ -28,7 +28,7 @@ class carModel:
 
         cars = dao.update_car(car_id, payload)
 
-        car_model = carModel(cars)
+        car_model = carModel(cars) if cars else None
 
         return car_model
 

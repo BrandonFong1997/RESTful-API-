@@ -39,6 +39,9 @@ class carDao:
         result = car_collection.update_one({"_id": ObjectId(car_id)}, {"$set": cars})
         _car_user = car_collection.find_one({"_id": ObjectId(car_id)})
 
+        if not _car_user:
+            return None
+
         return _car_user
 
     def delete_car(self, car_id):
