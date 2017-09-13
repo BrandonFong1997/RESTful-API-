@@ -11,7 +11,7 @@ class carModel:
         dao = carDao()
         cars = dao.get_car_by_id(car_id)
 
-        car_model = carModel(cars)
+        car_model = carModel(cars) if cars else None
 
         return car_model
 
@@ -35,12 +35,12 @@ class carModel:
     def delete_car(car_id):
         dao = carDao()
 
-        response = dao.delete_car(car_id)
+        cars = dao.delete_car(car_id)
 
-        if response:
-            response = {'message': 'car deleted'}
+        if cars:
+            cars = {'message': 'car deleted'}
 
-        return response
+        return cars
 
     def get_all_cars():
         dao = carDao()

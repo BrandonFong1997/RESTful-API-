@@ -1,4 +1,6 @@
-from mongo_utils import MongoUtils
+import traceback
+
+from util.mongo_utils import MongoUtils
 from pymongo.database import ObjectId
 
 class carDao:
@@ -17,6 +19,10 @@ class carDao:
 
         car_collection = self.get_collection()
         _car_user = car_collection.find_one({"_id": ObjectId(car_id)})
+
+        if not _car_user:
+            return None
+
         return _car_user
 
     def create_car(self, cars):
@@ -39,6 +45,7 @@ class carDao:
         car_collection = self.get_collection()
 
         _car_user = car_collection.find_one({"_id": ObjectId(car_id)})
+
         if not _car_user:
             return None
 
