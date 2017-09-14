@@ -2,10 +2,10 @@ from model.dao import carDao
 
 class carModel:
     def __init__(self, collection):
-        self.id = str(collection['_id'])
-        self.make = collection['make']
-        self.model = collection['model']
-        self.colour = collection['colour']
+        self.id = str(collection['_id']) if '_id' in collection else None
+        self.make = collection['make'] if 'make' in collection else None
+        self.model = collection['model'] if 'model' in collection else None
+        self.colour = collection['colour'] if 'colour' in collection else None
 
     def find_by_id(car_id):
         dao = carDao()

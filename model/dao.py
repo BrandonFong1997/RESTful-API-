@@ -1,4 +1,5 @@
 import traceback
+import util.config.settings as config
 
 from util.mongo_utils import MongoUtils
 from pymongo.database import ObjectId

@@ -1,5 +1,7 @@
 from pymongo import MongoClient
 
+import util.config.settings as config
+
 class MongoUtils:
     def __init__(self):
         pass
