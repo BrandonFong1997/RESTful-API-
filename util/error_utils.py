@@ -2,11 +2,11 @@ from flask import jsonify
 
 class ErrorUtil:
 
-    def bad_request():
+    def bad_request(errors):
         message = {
             'status': 400,
             'message': 'Bad Request',
-            'errors': 'Invalid Car Id',
+            'errors': str(errors) if errors else []
         }
         response = jsonify(message)
         response.status_code = 400
@@ -24,11 +24,11 @@ class ErrorUtil:
 
         return response
 
-    def internal_error():
+    def internal_error(errors):
         message = {
             'status': 500,
             'message': 'Internal Error',
-            'errors': 'Unknown'
+            'errors': str(errors) if errors else []
         }
         response = jsonify(message)
         response.status_code = 500

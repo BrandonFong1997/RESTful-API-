@@ -10,7 +10,7 @@ class carDao:
 
     def get_collection(self):
         collection_name = "carList"
-
+        
         db = MongoUtils.get_mongo_connection_db()
         collection = db[collection_name]
 

@@ -17,11 +17,11 @@ class Car(Resource):
             id_json = {'id': car_id}
             Validator.validate_get(id_json)
         except MultipleInvalid as e:
-            return ErrorUtil.bad_request()
+            return ErrorUtil.bad_request(e)
         try:
             cars = carModel.find_by_id(car_id)
-        except Exception:
-            return ErrorUtil.internal_error()
+        except Exception as e:
+            return ErrorUtil.internal_error(e)
 
         if not cars:
             return ErrorUtil.not_found()
@@ -40,12 +40,12 @@ class Car(Resource):
             Validator.validate_get(id_json)
             Validator.validate_put(payload)
         except MultipleInvalid as e:
-            return ErrorUtil.bad_request()
+            return ErrorUtil.bad_request(e)
 
         try:
             cars = carModel.find_by_id(car_id)
-        except Exception:
-            return ErrorUtil.internal_error()
+        except Exception as e:
+            return ErrorUtil.internal_error(e)
 
         cars = carModel.update_car(car_id, payload)
 
@@ -62,11 +62,11 @@ class Car(Resource):
             id_json = {'id': car_id}
             Validator.validate_get(id_json)
         except MultipleInvalid as e:
-            return ErrorUtil.bad_request()
+            return ErrorUtil.bad_request(e)
         try:
             cars = carModel.delete_car(car_id)
-        except Exception:
-            return ErrorUtil.internal_error()
+        except Exception as e:
+            return ErrorUtil.internal_error(e)
 
         if not cars:
             return ErrorUtil.not_found()
@@ -84,12 +84,12 @@ class CarQuery(Resource):
         try:
             Validator.validate_post(payload)
         except MultipleInvalid as e:
-            return ErrorUtil.bad_request()
+            return ErrorUtil.bad_request(e)
 
         try:
             cars = carModel.create_car(payload)
-        except Exception:
-            return ErrorUtil.internal_error()
+        except Exception as e:
+            return ErrorUtil.internal_error(e)
 
         data = jsonify(cars.__dict__)
         data.status_code = 201
@@ -99,8 +99,8 @@ class CarQuery(Resource):
     def get(self):
         try:
             query_cars = [car.__dict__ for car in carModel.get_all_cars()]
-        except Exception:
-            return ErrorUtil.internal_error()
+        except Exception as e:
+            return ErrorUtil.internal_error(e)
 
         if not query_cars:
             return ErrorUtil.not_found()

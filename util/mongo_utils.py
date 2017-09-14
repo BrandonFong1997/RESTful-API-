@@ -14,7 +14,9 @@ class MongoUtils:
 
         # DOCKER TEST host = "mongo"
         # LOCAL TEST host = "mongodb://127.0.0.1:27017"
+
         table = "cars"
+        # table = config.MONGO_DBNAME
 
         client = MongoClient(host)
 
