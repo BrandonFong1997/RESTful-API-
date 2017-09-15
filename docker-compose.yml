@@ -14,7 +14,9 @@ services:
     environment:
       SERVICE_NAME: 'my_web_app'
       MONGO_PORT: 27017
-      MONGO_DBNAME: 'cars'
+      MONGO_DBNAME: 'carList'
+      MONGO_COLLECTION: 'cars'
+      MONGO_HOST: 'mongo'
     links:
       - mongo
     depends_on:

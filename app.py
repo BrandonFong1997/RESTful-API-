@@ -1,6 +1,5 @@
 from flask import Flask, jsonify
 from flask_restful import request, Api, Resource
-from flask_pymongo import PyMongo
 
 from model.model import carModel
 from util.error_utils import ErrorUtil
@@ -9,6 +8,7 @@ from voluptuous.error import MultipleInvalid
 
 app = Flask(__name__)
 api = Api(app)
+
 
 class Car(Resource):
 

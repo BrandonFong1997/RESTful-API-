@@ -1,16 +1,16 @@
-import traceback
 import util.config.settings as config
 
 from util.mongo_utils import MongoUtils
 from pymongo.database import ObjectId
+
 
 class carDao:
     def __init__(self):
         self._logger = print
 
     def get_collection(self):
-        collection_name = "carList"
-        
+        collection_name = config.MONGO_DBNAME
+
         db = MongoUtils.get_mongo_connection_db()
         collection = db[collection_name]
 

@@ -1,5 +1,6 @@
 from model.dao import carDao
 
+
 class carModel:
     def __init__(self, collection):
         self.id = str(collection['_id']) if '_id' in collection else None
